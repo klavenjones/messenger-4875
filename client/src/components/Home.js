@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import { Redirect } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { Grid, CssBaseline, Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
-import { SidebarContainer } from './Sidebar'
-import { ActiveChat } from './ActiveChat'
+import React, { useEffect, useState } from "react"
+import { Redirect } from "react-router-dom"
+import { connect } from "react-redux"
+import { Grid, CssBaseline, Button } from "@material-ui/core"
+import { makeStyles } from "@material-ui/core/styles"
+import { SidebarContainer } from "./Sidebar"
+import { ActiveChat } from "./ActiveChat"
 import {
   logout,
   fetchConversations,
   postMessage
-} from '../store/utils/thunkCreators'
-import { clearOnLogout } from '../store/index'
+} from "../store/utils/thunkCreators"
+import { clearOnLogout } from "../store/index"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh'
+    height: "100vh"
   }
 }))
 
@@ -33,12 +33,10 @@ const Home = (props) => {
     fetchConversations()
   }, [fetchConversations])
 
- 
-
   if (!user.id) {
     // If we were previously logged in, redirect to login instead of register
-    if (isLoggedIn) return <Redirect to='/login' />
-    return <Redirect to='/register' />
+    if (isLoggedIn) return <Redirect to="/login" />
+    return <Redirect to="/register" />
   }
 
   const handleLogout = async () => {
@@ -51,7 +49,7 @@ const Home = (props) => {
       <Button className={classes.logout} onClick={handleLogout}>
         Logout
       </Button>
-      <Grid container component='main' className={classes.root}>
+      <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <SidebarContainer />
         <ActiveChat />

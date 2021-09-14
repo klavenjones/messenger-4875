@@ -1,11 +1,11 @@
-const router = require('express').Router()
-const { User, Conversation, Message } = require('../../db/models')
-const { Op } = require('sequelize')
-const onlineUsers = require('../../onlineUsers')
+const router = require("express").Router()
+const { User, Conversation, Message } = require("../../db/models")
+const { Op } = require("sequelize")
+const onlineUsers = require("../../onlineUsers")
 
 // get all conversations for a user, include latest message text for preview, and all messages
 // include other user model so we have info on username/profile pic (don't include current user info)
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     if (!req.user) {
       return res.sendStatus(401)
@@ -18,30 +18,30 @@ router.get('/', async (req, res, next) => {
           user2Id: userId
         }
       },
-      attributes: ['id'],
-      order: [[Message, 'createdAt', 'ASC']],
+      attributes: ["id"],
+      order: [[Message, "createdAt", "ASC"]],
       include: [
-        { model: Message, order: ['createdAt', 'ASC'] },
+        { model: Message, order: ["createdAt", "ASC"] },
         {
           model: User,
-          as: 'user1',
+          as: "user1",
           where: {
             id: {
               [Op.not]: userId
             }
           },
-          attributes: ['id', 'username', 'photoUrl'],
+          attributes: ["id", "username", "photoUrl"],
           required: false
         },
         {
           model: User,
-          as: 'user2',
+          as: "user2",
           where: {
             id: {
               [Op.not]: userId
             }
           },
-          attributes: ['id', 'username', 'photoUrl'],
+          attributes: ["id", "username", "photoUrl"],
           required: false
         }
       ]
