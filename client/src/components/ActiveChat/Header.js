@@ -1,7 +1,7 @@
-import React from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import { Box, Typography } from "@material-ui/core"
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz"
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Box, Typography } from "@material-ui/core";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,11 +43,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 24,
     opacity: 0.5
   }
-}))
+}));
 
 const Header = (props) => {
-  const classes = useStyles()
-  const { username, online } = props
+  const classes = useStyles();
+  const { username, online } = props;
 
   return (
     <Box className={classes.root}>
@@ -62,7 +62,7 @@ const Header = (props) => {
       </Box>
       <MoreHorizIcon classes={{ root: classes.ellipsis }} />
     </Box>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

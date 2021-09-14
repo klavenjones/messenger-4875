@@ -1,8 +1,8 @@
-import React, { useEffect } from "react"
-import { makeStyles } from "@material-ui/core/styles"
-import { Box } from "@material-ui/core"
-import { Input, Header, Messages } from "./index"
-import { connect } from "react-redux"
+import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
+import { Input, Header, Messages } from "./index";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -18,16 +18,16 @@ const useStyles = makeStyles(() => ({
     flexGrow: 1,
     justifyContent: "space-between"
   }
-}))
+}));
 
 const ActiveChat = (props) => {
-  const classes = useStyles()
-  const { user } = props
-  const conversation = props.conversation || {}
+  const classes = useStyles();
+  const { user } = props;
+  const conversation = props.conversation || {};
 
   useEffect(() => {
-    console.log("fired ACTIVE")
-  }, [props.conversation])
+    console.log("fired ACTIVE");
+  }, [props.conversation]);
 
   return (
     <Box className={classes.root}>
@@ -53,8 +53,8 @@ const ActiveChat = (props) => {
         </>
       )}
     </Box>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -65,7 +65,7 @@ const mapStateToProps = (state) => {
         (conversation) =>
           conversation.otherUser.username === state.activeConversation
       )
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, null)(ActiveChat)
+export default connect(mapStateToProps, null)(ActiveChat);
