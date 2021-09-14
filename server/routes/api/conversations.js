@@ -68,9 +68,9 @@ router.get('/', async (req, res, next) => {
       }
 
       // set properties for notification count and latest message preview
-      //Since we are looking for the last 
-      const endOfConvoList = convoJSON.messages.length - 1
-      convoJSON.latestMessageText = convoJSON.messages[endOfConvoList].text
+      // Due to reversing the order of the array, the latest message will be located at the end of the list now.
+      const endOfConvoListIndex = convoJSON.messages.length - 1
+      convoJSON.latestMessageText = convoJSON.messages[endOfConvoListIndex].text
       conversations[i] = convoJSON
     }
 
