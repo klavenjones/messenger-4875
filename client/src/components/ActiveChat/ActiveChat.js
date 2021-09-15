@@ -25,9 +25,7 @@ const ActiveChat = (props) => {
   const { user } = props;
   const conversation = props.conversation || {};
 
-  useEffect(() => {
-    console.log("fired ACTIVE");
-  }, [props.conversation]);
+ 
 
   return (
     <Box className={classes.root}>

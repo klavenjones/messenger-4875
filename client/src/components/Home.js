@@ -5,11 +5,7 @@ import { Grid, CssBaseline, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { SidebarContainer } from "./Sidebar";
 import { ActiveChat } from "./ActiveChat";
-import {
-  logout,
-  fetchConversations,
-  postMessage
-} from "../store/utils/thunkCreators";
+import { logout, fetchConversations } from "../store/utils/thunkCreators";
 import { clearOnLogout } from "../store/index";
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = (props) => {
   const classes = useStyles();
-  const { user, logout, fetchConversations, postMessage } = props;
+  const { user, logout, fetchConversations } = props;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {

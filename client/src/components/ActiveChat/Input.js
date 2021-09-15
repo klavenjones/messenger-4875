@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { FormControl, FilledInput } from "@material-ui/core";
-import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { postMessage } from "../../store/utils/thunkCreators";
