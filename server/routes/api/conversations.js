@@ -47,7 +47,6 @@ router.get("/", async (req, res, next) => {
       ]
     });
 
-    //Let's just reverse the list.
     conversations.reverse();
 
     for (let i = 0; i < conversations.length; i++) {
