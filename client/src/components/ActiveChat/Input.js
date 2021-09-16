@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     postMessage: (message) => {
       dispatch(postMessage(message));
-    },
+    }
   };
 };
 

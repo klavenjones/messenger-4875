@@ -45,7 +45,8 @@ const Search = (props) => {
             <InputAdornment position="start">
               <SearchIcon />
             </InputAdornment>
-          }></FilledInput>
+          }
+        ></FilledInput>
       </FormControl>
     </form>
   );
