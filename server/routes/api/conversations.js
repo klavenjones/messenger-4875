@@ -71,6 +71,18 @@ router.get("/", async (req, res, next) => {
 
       // set properties for notification count and latest message preview
       // Due to reversing the order of the array, the latest message will be located at the end of the list now.
+      let unReadMessages = 0;
+      unReadMessages = await Message.count({
+        where: {
+          [Op.not]: {
+            senderId: convoJSON.otherUser.id
+          },
+          conversationId: convoJSON.id,
+          read: false
+        }
+      });
+      convoJSON.unReadMessages = unReadMessages;
+
       const endOfConvoListIndex = convoJSON.messages.length - 1;
       convoJSON.latestMessageText =
         convoJSON.messages[endOfConvoListIndex].text;

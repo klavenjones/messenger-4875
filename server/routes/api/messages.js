@@ -43,4 +43,21 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+//Apply read message
+router.put("/", async (req, res, next) => {
+  try {
+    if (!req.user) {
+      return res.sendStatus(401);
+    }
+    const { senderId, conversationId } = req.body;
+    if (conversationId) {
+      await Message.markAsRead(senderId, conversationId);
+      return res.sendStatus(204);
+    }
+    return res.sendStatus(400);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
