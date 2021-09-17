@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
         return next();
       }
       User.findOne({
-        where: { id: decoded.id },
+        where: { id: decoded.id }
       }).then((user) => {
         req.user = user;
         return next();

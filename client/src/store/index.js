@@ -27,4 +27,7 @@ const rootReducer = (state, action) => {
   return appReducer(state, action);
 };
 
-export default createStore(rootReducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
+export default createStore(
+  rootReducer,
+  applyMiddleware(thunkMiddleware, loggerMiddleware)
+);

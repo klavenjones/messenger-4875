@@ -15,37 +15,39 @@ router.get("/", async (req, res, next) => {
       where: {
         [Op.or]: {
           user1Id: userId,
-          user2Id: userId,
-        },
+          user2Id: userId
+        }
       },
       attributes: ["id"],
-      order: [[Message, "createdAt", "DESC"]],
+      order: [[Message, "createdAt", "ASC"]],
       include: [
-        { model: Message, order: ["createdAt", "DESC"] },
+        { model: Message, order: ["createdAt", "ASC"] },
         {
           model: User,
           as: "user1",
           where: {
             id: {
-              [Op.not]: userId,
-            },
+              [Op.not]: userId
+            }
           },
           attributes: ["id", "username", "photoUrl"],
-          required: false,
+          required: false
         },
         {
           model: User,
           as: "user2",
           where: {
             id: {
-              [Op.not]: userId,
-            },
+              [Op.not]: userId
+            }
           },
           attributes: ["id", "username", "photoUrl"],
-          required: false,
-        },
-      ],
+          required: false
+        }
+      ]
     });
+
+    conversations.reverse();
 
     for (let i = 0; i < conversations.length; i++) {
       const convo = conversations[i];
@@ -68,7 +70,22 @@ router.get("/", async (req, res, next) => {
       }
 
       // set properties for notification count and latest message preview
-      convoJSON.latestMessageText = convoJSON.messages[0].text;
+      // Due to reversing the order of the array, the latest message will be located at the end of the list now.
+      let unReadMessages = 0;
+      unReadMessages = await Message.count({
+        where: {
+          [Op.not]: {
+            senderId: convoJSON.otherUser.id
+          },
+          conversationId: convoJSON.id,
+          read: false
+        }
+      });
+      convoJSON.unReadMessages = unReadMessages;
+
+      const endOfConvoListIndex = convoJSON.messages.length - 1;
+      convoJSON.latestMessageText =
+        convoJSON.messages[endOfConvoListIndex].text;
       conversations[i] = convoJSON;
     }
 

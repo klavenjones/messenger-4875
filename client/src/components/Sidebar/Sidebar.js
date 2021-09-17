@@ -30,9 +30,16 @@ const Sidebar = (props) => {
       <Typography className={classes.title}>Chats</Typography>
       <Search handleChange={handleChange} />
       {conversations
-        .filter((conversation) => conversation.otherUser.username.includes(searchTerm))
+        .filter((conversation) =>
+          conversation.otherUser.username.includes(searchTerm)
+        )
         .map((conversation) => {
-          return <Chat conversation={conversation} key={conversation.otherUser.username} />;
+          return (
+            <Chat
+              conversation={conversation}
+              key={conversation.otherUser.username}
+            />
+          );
         })}
     </Box>
   );

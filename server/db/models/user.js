@@ -46,7 +46,11 @@ User.createSalt = function () {
 };
 
 User.encryptPassword = function (plainPassword, salt) {
-  return crypto.createHash("RSA-SHA256").update(plainPassword).update(salt).digest("hex");
+  return crypto
+    .createHash("RSA-SHA256")
+    .update(plainPassword)
+    .update(salt)
+    .digest("hex");
 };
 
 const setSaltAndPassword = (user) => {
