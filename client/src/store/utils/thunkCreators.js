@@ -5,7 +5,8 @@ import {
   addConversation,
   setNewMessage,
   setSearchedUsers,
-  setMessageStatus
+  setMessageStatus,
+  setUnreadMessages
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
@@ -123,7 +124,7 @@ export const markAsRead = (conversation) => async (dispatch) => {
       senderId: conversation.otherUser.id,
       conversationId: conversation.id
     });
-    dispatch(setMessageStatus(conversation.id));
+    dispatch(setUnreadMessages(conversation.id));
   } catch (error) {
     console.log(error);
   }
