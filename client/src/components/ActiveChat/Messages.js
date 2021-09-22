@@ -6,13 +6,11 @@ import moment from "moment";
 const Messages = (props) => {
   const [lastReadId, setLastRead] = useState(null);
   const { messages, otherUser, userId } = props;
-  console.log("PROPS", props);
   //Setting last read
   useEffect(() => {
     let lastMessageId;
     for (let i = 0; i < props.messages.length; i++) {
       if (props.messages[i].senderId === props.userId) {
-        console.log(props.messages[i].read);
         if (props.messages[i].read) {
           lastMessageId = props.messages[i].id;
         }

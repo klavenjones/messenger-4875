@@ -5,8 +5,7 @@ import {
   addConversation,
   setNewMessage,
   setSearchedUsers,
-  setMessageStatus,
-  setUnreadMessages
+  setMessageStatus
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
@@ -93,6 +92,12 @@ const sendMessage = (data, body) => {
   });
 };
 
+const sendStatus = (data) => {
+  socket.emit("read-status", {
+    conversation: data
+  });
+};
+
 // message format to send: {recipientId, text, conversationId}
 // conversationId will be set to null if its a brand new conversation
 export const postMessage = (body) => async (dispatch) => {
@@ -124,7 +129,9 @@ export const markAsRead = (conversation) => async (dispatch) => {
       senderId: conversation.otherUser.id,
       conversationId: conversation.id
     });
-    dispatch(setUnreadMessages(conversation.id));
+    dispatch(setMessageStatus(conversation.id));
+    // dispatch(setNewMessage(conversation.message));
+    sendStatus(conversation);
   } catch (error) {
     console.log(error);
   }

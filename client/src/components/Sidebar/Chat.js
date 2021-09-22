@@ -35,14 +35,13 @@ const Chat = (props) => {
   const classes = useStyles();
   const { conversation, setActiveChat, markAsRead } = props;
   const { otherUser } = conversation;
-  console.log(conversation);
+
 
   const handleClick = async (convo) => {
     if (convo.id) {
       await markAsRead(convo);
     }
     await setActiveChat(convo.otherUser.username);
-    console.log(convo.id, convo);
   };
 
   return (

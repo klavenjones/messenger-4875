@@ -49,9 +49,9 @@ router.put("/", async (req, res, next) => {
     if (!req.user) {
       return res.sendStatus(401);
     }
-    const { senderId, conversationId } = req.body;
-    if (conversationId && senderId !== req.user.id) {
-      await Message.markAsRead(senderId, conversationId);
+    const { conversationId } = req.body;
+    if (conversationId) {
+      await Message.markAsRead(req.user.id, conversationId);
       return res.sendStatus(204);
     }
     return res.sendStatus(400);

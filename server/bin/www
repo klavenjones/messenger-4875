@@ -45,6 +45,14 @@ io.on("connection", (socket) => {
       message: data.message,
       sender: data.sender
     });
+    
+  });
+
+
+  socket.on("read-message", (data) => {
+    socket.broadcast.emit("read-message", {
+      conversation: data.conversation
+    });
   });
 
   socket.on("logout", (id) => {
