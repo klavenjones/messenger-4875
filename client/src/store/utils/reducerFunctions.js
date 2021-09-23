@@ -5,7 +5,7 @@ export const addMessageToStore = (state, payload) => {
     const newConvo = {
       id: message.conversationId,
       otherUser: sender,
-      messages: [message],
+      messages: [message]
     };
     newConvo.latestMessageText = message.text;
     return [newConvo, ...state];
@@ -77,4 +77,30 @@ export const addNewConvoToStore = (state, recipientId, message) => {
       return convo;
     }
   });
+};
+
+export const resetCount = (state, conversationId) => {
+  const newState = state.map((convo) => {
+    if (convo.id === conversationId) {
+      const newConvo = { ...convo };
+      newConvo.unreadMessages = 0;
+      return newConvo;
+    } else {
+      return convo;
+    }
+  });
+  return newState;
+};
+
+export const incrementCount = (state, conversationId) => {
+  const newState = state.map((convo) => {
+    if (convo.id === conversationId) {
+      const newConvo = { ...convo };
+      newConvo.unreadMessages++;
+      return newConvo;
+    } else {
+      return convo;
+    }
+  });
+  return newState;
 };

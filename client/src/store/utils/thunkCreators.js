@@ -5,6 +5,7 @@ import {
   addConversation,
   setNewMessage,
   setSearchedUsers,
+  resetUnreadCount
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
@@ -87,8 +88,29 @@ const sendMessage = (data, body) => {
   socket.emit("new-message", {
     message: data.message,
     recipientId: body.recipientId,
-    sender: data.sender,
+    sender: data.sender
   });
+};
+
+//put to a route that sets all messages in a convo to read when viewed by current user;
+export const setReadMessages = (conversation) => async (dispatch) => {
+  try {
+    await axios.put("/api/messages/update", { conversation });
+    dispatch(resetUnreadCount(conversation.id)); //reset unread messages in current convo to 0;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateMessage = (message, sender) => async (dispatch) => {
+  try {
+    await axios.put(`/api/messages/update/${message.id}`, {
+      messageId: message.id
+    });
+    dispatch(setNewMessage(message, sender));
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // message format to send: {recipientId, text, conversationId}
