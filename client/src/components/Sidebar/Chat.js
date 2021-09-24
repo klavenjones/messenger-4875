@@ -3,7 +3,8 @@ import { Box, Badge } from "@material-ui/core";
 import { BadgeAvatar, ChatContent } from "../Sidebar";
 import { makeStyles } from "@material-ui/core/styles";
 import { setActiveChat } from "../../store/activeConversation";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { setReadMessages } from "../../store/utils/thunkCreators";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,11 +32,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Chat = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const { conversation } = props;
   const { otherUser } = conversation;
 
   const handleClick = async (conversation) => {
-    await props.setActiveChat(conversation.otherUser.username);
+    if (conversation.unreadMessages > 0) {
+      console.log("FIRE");
+      await dispatch(setReadMessages(conversation));
+    }
+    dispatch(setActiveChat(conversation.otherUser.username));
   };
 
   return (
@@ -54,12 +60,4 @@ const Chat = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setActiveChat: (id) => {
-      dispatch(setActiveChat(id));
-    }
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Chat);
+export default connect(null)(Chat);

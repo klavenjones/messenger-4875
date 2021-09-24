@@ -20,18 +20,21 @@ socket.on("connect", () => {
   socket.on("remove-offline-user", (id) => {
     store.dispatch(removeOfflineUser(id));
   });
+
   socket.on("new-message", async (data) => {
-    let { message, sender } = data;
-    // const { user, activeConversation } = store.getState();
-    // if (
-    //   user.id === recipientId &&
-    //   activeConversation.id === message.conversationId
-    // ) {
+    let { message, sender, recipientId } = data;
+    const user = store.getState().user;
+    const activeConvo = store.getState().activeConversation;
+    console.log("SOCKET client");
+
+    // if (user.id === recipientId && activeConvo.id === message.conversationId) {
     //   //update a single message
-    //   await store.dispatch(updateMessage(message, sender));
+    //   console.log("SOCKET");
+    //   store.dispatch(updateMessage(message, sender));
     // } else {
-    store.dispatch(setNewMessage(message, sender));
-   
+    //   store.dispatch(incrementUnreadCount(message.conversationId));
+    //   store.dispatch(setNewMessage(message, sender));
+    // }
   });
 });
 
