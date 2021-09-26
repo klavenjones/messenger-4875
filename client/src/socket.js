@@ -25,16 +25,14 @@ socket.on("connect", () => {
     let { message, sender, recipientId } = data;
     const user = store.getState().user;
     const activeConvo = store.getState().activeConversation;
-    console.log("SOCKET client");
 
-    // if (user.id === recipientId && activeConvo.id === message.conversationId) {
-    //   //update a single message
-    //   console.log("SOCKET");
-    //   store.dispatch(updateMessage(message, sender));
-    // } else {
-    //   store.dispatch(incrementUnreadCount(message.conversationId));
-    //   store.dispatch(setNewMessage(message, sender));
-    // }
+    if (user.id === recipientId && activeConvo.id === message.conversationId) {
+      //update a single message
+      store.dispatch(updateMessage(message, sender));
+    } else {
+      store.dispatch(incrementUnreadCount(message.conversationId));
+      store.dispatch(setNewMessage(message, sender));
+    }
   });
 });
 

@@ -38,9 +38,9 @@ const Chat = (props) => {
 
   const handleClick = async (conversation) => {
     if (conversation.unreadMessages > 0) {
-      console.log("FIRE");
       await dispatch(setReadMessages(conversation));
     }
+
     dispatch(setActiveChat(conversation.otherUser.username));
   };
 
@@ -53,8 +53,8 @@ const Chat = (props) => {
         sidebar={true}
       />
       <ChatContent conversation={conversation} />
-      {conversation.unReadMessages > 0 && (
-        <Badge className={classes.badge}>{conversation.unReadMessages}</Badge>
+      {conversation.unreadMessages > 0 && (
+        <Badge className={classes.badge}>{conversation.unreadMessages}</Badge>
       )}
     </Box>
   );

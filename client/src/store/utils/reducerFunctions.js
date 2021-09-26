@@ -83,7 +83,8 @@ export const addNewConvoToStore = (state, recipientId, message) => {
 };
 
 export const resetCount = (state, conversationId) => {
-  const newState = state.map((convo) => {
+  const newState = [...state];
+  return newState.map((convo) => {
     if (convo.id === conversationId) {
       const newConvo = { ...convo };
       newConvo.unreadMessages = 0;
@@ -92,11 +93,11 @@ export const resetCount = (state, conversationId) => {
       return convo;
     }
   });
-  return newState;
 };
 
 export const incrementCount = (state, conversationId) => {
-  const newState = state.map((convo) => {
+  const newState = [...state];
+  return newState.map((convo) => {
     if (convo.id === conversationId) {
       const newConvo = { ...convo };
       newConvo.unreadMessages++;
@@ -105,5 +106,4 @@ export const incrementCount = (state, conversationId) => {
       return convo;
     }
   });
-  return newState;
 };

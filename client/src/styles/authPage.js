@@ -7,7 +7,8 @@ export const useStyles = makeStyles((theme) => ({
     display: "grid",
     gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    position: "relative"
   },
   leftColumn: {
     backgroundImage:
@@ -45,9 +46,10 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "end",
     alignItems: "center",
     padding: "30px 40px",
-    position: "fixed",
+    position: "absolute",
     top: 10,
     right: 0,
+    left: 0,
     zIndex: 10
   },
   button: {
