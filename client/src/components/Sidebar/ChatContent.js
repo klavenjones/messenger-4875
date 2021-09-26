@@ -1,27 +1,9 @@
 import React from "react";
 import { Box, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginLeft: 20,
-    flexGrow: 1,
-  },
-  username: {
-    fontWeight: "bold",
-    letterSpacing: -0.2,
-  },
-  previewText: {
-    fontSize: 12,
-    color: "#9CADC8",
-    letterSpacing: -0.17,
-  },
-}));
+import { useChatContentStyles } from "../../styles";
 
 const ChatContent = (props) => {
-  const classes = useStyles();
+  const classes = useChatContentStyles();
 
   const { conversation } = props;
   const { latestMessageText, otherUser } = conversation;

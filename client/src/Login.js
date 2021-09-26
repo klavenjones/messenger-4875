@@ -10,12 +10,12 @@ import {
   TextField
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
-import { useStyles } from "./styles/authPage";
+import { useAuthStyles } from "./styles/AuthPage";
 
 const Login = (props) => {
   const history = useHistory();
   const { user, login } = props;
-  const classes = useStyles();
+  const classes = useAuthStyles();
   const handleLogin = async (event) => {
     event.preventDefault();
     const username = event.target.username.value;
@@ -29,7 +29,7 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center" className={classes.root}>
+    <Grid container justifyContent="center" className={classes.root}>
       <Box className={classes.leftColumn}>
         <Grid className={classes.introIcon}>
           <img src="/img/bubble.svg" alt="Bubble Icon" />

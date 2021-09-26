@@ -1,7 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
-import zIndex from "@material-ui/core/styles/zIndex";
 
-export const useStyles = makeStyles((theme) => ({
+export const useAuthStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
     display: "grid",

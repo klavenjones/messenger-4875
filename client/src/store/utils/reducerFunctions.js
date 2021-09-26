@@ -63,7 +63,6 @@ export const addSearchedUsersToStore = (state, users) => {
       newState.push(fakeConvo);
     }
   });
-
   return newState;
 };
 

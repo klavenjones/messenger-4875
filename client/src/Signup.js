@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import { useStyles } from "./styles/authPage";
+import { useAuthStyles } from "./styles/AuthPage";
 import {
   Grid,
   Box,
@@ -15,7 +15,7 @@ import { register } from "./store/utils/thunkCreators";
 
 const Login = (props) => {
   const history = useHistory();
-  const classes = useStyles();
+  const classes = useAuthStyles();
   const { user, register } = props;
   const [formErrorMessage, setFormErrorMessage] = useState({});
 
@@ -39,7 +39,7 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center" className={classes.root}>
+    <Grid container justifyContent="center" className={classes.root}>
       <Box className={classes.leftColumn}>
         <Grid className={classes.introIcon}>
           <img src="/img/bubble.svg" alt="Bubble Icon" />

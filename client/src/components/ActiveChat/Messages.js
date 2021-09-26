@@ -1,28 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Box, Avatar } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { useMessageStyles } from "../../styles/ActiveChat";
 import { SenderBubble, OtherUserBubble } from "../ActiveChat";
 import moment from "moment";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-end"
-  },
-  avatar: {
-    height: 40,
-    width: 40,
-    marginRight: 1,
-    marginTop: 1,
-    marginBottom: 6
-  }
-}));
+
 
 const Messages = (props) => {
   const [lastRead, setLastRead] = useState();
   const { messages, otherUser, userId } = props;
-  const classes = useStyles();
+  const classes = useMessageStyles();
 
   useEffect(() => {
     let index;
@@ -35,7 +22,6 @@ const Messages = (props) => {
       }
     }
     setLastRead(index);
-    console.log("FIRED");
   }, [props]);
 
   return (
