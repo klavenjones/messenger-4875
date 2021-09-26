@@ -78,8 +78,24 @@ router.get("/", async (req, res, next) => {
         }
       });
       convoJSON.unreadMessages = unreadMessages;
+
+      //Let's get the last Read message
+      let readMessages = await Message.findAll({
+        where: {
+          senderId: req.user.id,
+          conversationId: convoJSON.id,
+          read: true
+        }
+      });
+
+      if (readMessages[readMessages.length - 1]) {
+        convoJSON.lastReadMessage = readMessages[readMessages.length - 1];
+        console.log(convoJSON.lastReadMessage);
+      }
+
       // set properties for notification count and latest message preview
-      convoJSON.latestMessageText = convoJSON.messages[0].text;
+      convoJSON.latestMessageText =
+        convoJSON.messages[convoJSON.messages.length - 1].text;
       conversations[i] = convoJSON;
     }
 
