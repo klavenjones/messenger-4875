@@ -4,25 +4,9 @@ import { useMessageStyles } from "../../styles/ActiveChat";
 import { SenderBubble, OtherUserBubble } from "../ActiveChat";
 import moment from "moment";
 
-
-
 const Messages = (props) => {
-  const [lastRead, setLastRead] = useState();
-  const { messages, otherUser, userId } = props;
+  const { messages, otherUser, userId, lastRead } = props;
   const classes = useMessageStyles();
-
-  useEffect(() => {
-    let index;
-    const length = props.messages.length;
-    for (let i = 0; i < length; i++) {
-      if (props.messages[i].senderId === props.userId) {
-        if (props.messages[i].read) {
-          index = props.messages[i].id;
-        }
-      }
-    }
-    setLastRead(index);
-  }, [props]);
 
   return (
     <Box>
