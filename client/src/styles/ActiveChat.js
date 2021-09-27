@@ -105,13 +105,6 @@ export const useMessageStyles = makeStyles(() => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-end"
-  },
-  avatar: {
-    height: 40,
-    width: 40,
-    marginRight: 1,
-    marginTop: 1,
-    marginBottom: 6
   }
 }));
 
@@ -137,5 +130,12 @@ export const useSenderBubbleStyles = makeStyles(() => ({
   bubble: {
     background: "#F4F6FA",
     borderRadius: "10px 10px 0 10px"
+  },
+  avatar: {
+    height: 30,
+    width: 30,
+    marginRight: 1,
+    marginTop: 1,
+    marginBottom: 6
   }
 }));

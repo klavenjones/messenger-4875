@@ -4,6 +4,7 @@ import { BadgeAvatar, ChatContent } from "../Sidebar";
 import { useChatStyles } from "../../styles";
 import { setActiveChat } from "../../store/activeConversation";
 import { connect, useDispatch } from "react-redux";
+import { setLastRead } from "../../store/utils/reducerFunctions";
 import { setReadMessages } from "../../store/utils/thunkCreators";
 
 const Chat = (props) => {
@@ -18,6 +19,7 @@ const Chat = (props) => {
     }
 
     dispatch(setActiveChat(conversation.otherUser.username));
+    
   };
 
   return (

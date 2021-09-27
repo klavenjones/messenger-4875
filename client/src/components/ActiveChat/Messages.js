@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Box, Avatar } from "@material-ui/core";
 import { useMessageStyles } from "../../styles/ActiveChat";
 import { SenderBubble, OtherUserBubble } from "../ActiveChat";
@@ -6,6 +6,7 @@ import moment from "moment";
 
 const Messages = (props) => {
   const { messages, otherUser, userId, lastRead } = props;
+
   const classes = useMessageStyles();
 
   return (
@@ -15,14 +16,12 @@ const Messages = (props) => {
 
         return message.senderId === userId ? (
           <div key={message.id} className={classes.root}>
-            <SenderBubble text={message.text} time={time} />
-            {message.id === lastRead && (
-              <Avatar
-                alt={otherUser.username}
-                src={otherUser.photoUrl}
-                className={classes.avatar}
-              ></Avatar>
-            )}
+            <SenderBubble
+              time={time}
+              message={message}
+              lastRead={lastRead}
+              otherUser={otherUser}
+            />
           </div>
         ) : (
           <OtherUserBubble

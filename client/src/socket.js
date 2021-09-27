@@ -4,7 +4,7 @@ import {
   setNewMessage,
   removeOfflineUser,
   addOnlineUser,
-  incrementUnreadCount
+  incrementUnreadCount,
 } from "./store/conversations";
 import { updateMessage } from "./store/utils/thunkCreators";
 
@@ -34,6 +34,7 @@ socket.on("connect", () => {
       store.dispatch(setNewMessage(message, sender));
     }
   });
+
 });
 
 export default socket;

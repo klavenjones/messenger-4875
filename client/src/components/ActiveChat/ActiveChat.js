@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box } from "@material-ui/core";
 import { Input, Header, Messages } from "./index";
 import { useActiveChatStyles } from "../../styles/ActiveChat";
@@ -8,7 +8,7 @@ const ActiveChat = (props) => {
   const classes = useActiveChatStyles();
   const { user } = props;
   const conversation = props.conversation || {};
-  console.log(conversation);
+
   return (
     <Box className={classes.root}>
       {conversation.otherUser && (

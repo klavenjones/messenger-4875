@@ -5,7 +5,7 @@ import {
   removeOfflineUserFromStore,
   addMessageToStore,
   resetCount,
-  incrementCount
+  incrementCount,
 } from "./utils/reducerFunctions";
 
 // ACTIONS
@@ -35,6 +35,7 @@ export const incrementUnreadCount = (conversationId) => {
     conversationId
   };
 };
+
 
 export const gotConversations = (conversations) => {
   return {

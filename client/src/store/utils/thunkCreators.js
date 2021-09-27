@@ -96,7 +96,7 @@ const sendMessage = (data, body) => {
 export const setReadMessages = (conversation) => async (dispatch) => {
   try {
     await axios.put("/api/messages/update", { conversation });
-    dispatch(resetUnreadCount(conversation.id)); //reset unread messages in current convo to 0;
+    dispatch(resetUnreadCount(conversation.id)); //reset unread messages in current  
   } catch (error) {
     console.error(error);
   }
