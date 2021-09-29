@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const { Op } = require("sequelize");
 const db = require("../db");
 
 const Message = db.define("message", {
@@ -17,13 +18,15 @@ const Message = db.define("message", {
   }
 });
 
-Message.markAsRead = async function (senderId, conversationId) {
+Message.markAsRead = async function (userId, conversationId) {
   return await Message.update(
     { read: true },
     {
       where: {
         conversationId: conversationId,
-        senderId: senderId,
+        senderId: {
+          [Op.not]: userId
+        },
         read: false
       }
     }

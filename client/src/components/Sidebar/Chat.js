@@ -24,12 +24,16 @@ const Chat = (props) => {
   const classes = useStyles();
   const { conversation, setActiveChat, markAsRead } = props;
   const { otherUser } = conversation;
-
+  console.log(conversation);
   const handleClick = async (conversation) => {
-    if (conversation.id) {
-      await markAsRead(conversation);
+    try {
+      Promise.all([
+        setActiveChat(conversation.otherUser.username),
+        markAsRead(conversation.id, otherUser.id)
+      ]);
+    } catch (error) {
+      console.log(error);
     }
-    await setActiveChat(conversation.otherUser.username);
   };
 
   return (
@@ -50,8 +54,8 @@ const mapDispatchToProps = (dispatch) => {
     setActiveChat: (id) => {
       dispatch(setActiveChat(id));
     },
-    markAsRead: (conversation) => {
-      dispatch(markAsRead(conversation));
+    markAsRead: (convoId, senderId) => {
+      dispatch(markAsRead(convoId, senderId));
     }
   };
 };

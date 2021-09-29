@@ -82,19 +82,31 @@ export const addNewConvoToStore = (state, recipientId, message) => {
   });
 };
 
-export const addMessageReadToStore = (state, payload) => {
-  const { conversationId } = payload;
-  const newState = [...state];
-  return newState.map((convo) => {
-    if (convo.id === conversationId) {
-      const convoCopy = { ...convo };
+// export const addMessageReadToStore = (state, payload) => {
+//   const { conversationId } = payload;
+//   const newState = [...state];
+//   return newState.map((convo) => {
+//     if (convo.id === conversationId) {
+//       const convoCopy = { ...convo };
 
-      convoCopy.messages.forEach((message) => {
-        if (message.senderId !== convoCopy.otherUser.id) {
-          message.read = true;
-        }
-      });
-      return convoCopy;
+//       convoCopy.messages.forEach((message) => {
+//         if (message.senderId !== convoCopy.otherUser.id) {
+//           message.read = true;
+//         }
+//       });
+//       return convoCopy;
+//     } else {
+//       return convo;
+//     }
+//   });
+// };
+
+//Decided to create a function that will update conversation when we make a change
+
+export const updateConversationInStore = (state, updatedConvo) => {
+  return state.map((convo) => {
+    if (convo.id === updatedConvo.id) {
+      return updatedConvo;
     } else {
       return convo;
     }
