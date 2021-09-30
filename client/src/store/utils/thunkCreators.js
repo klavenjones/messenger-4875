@@ -5,7 +5,8 @@ import {
   addConversation,
   setNewMessage,
   setSearchedUsers,
-  updateConversation
+  setReadMessages,
+  setUnreadMessages
 } from "../conversations";
 import { gotUser, setFetchingStatus } from "../user";
 
@@ -120,11 +121,11 @@ export const searchUsers = (searchTerm) => async (dispatch) => {
 // So I decided to make a thunk similar to save message, where I'll receive the data when ever a user reads, and update the convo
 export const markAsRead = (convoId, senderId) => async (dispatch) => {
   try {
-    const { data } = await axios.put("/api/messages/read", {
+    await axios.put("/api/messages/read", {
       conversationId: convoId,
       senderId: senderId
     });
-    dispatch(updateConversation(data.conversation));
+    dispatch(setUnreadMessages(convoId));
   } catch (error) {
     console.error(error);
   }

@@ -5,17 +5,27 @@ export const addMessageToStore = (state, payload) => {
     const newConvo = {
       id: message.conversationId,
       otherUser: sender,
-      messages: [message]
+      messages: [message],
+      unreadMessages: 0
     };
+
     newConvo.latestMessageText = message.text;
     return [newConvo, ...state];
   }
+
   let newStateCopy = [...state];
   return newStateCopy.map((convo) => {
     if (convo.id === message.conversationId) {
       const convoCopy = { ...convo };
-      convoCopy.messages.push(message);
+      const { messages, otherUser, user1, user2 } = convoCopy;
+
+      messages.push(message);
       convoCopy.latestMessageText = message.text;
+      if (messages[messages.length - 1].senderId === otherUser.id) {
+        if (!user1 || !user2) {
+          convoCopy.unreadMessages++;
+        }
+      }
       return convoCopy;
     } else {
       return convo;
@@ -82,33 +92,33 @@ export const addNewConvoToStore = (state, recipientId, message) => {
   });
 };
 
-// export const addMessageReadToStore = (state, payload) => {
-//   const { conversationId } = payload;
-//   const newState = [...state];
-//   return newState.map((convo) => {
-//     if (convo.id === conversationId) {
-//       const convoCopy = { ...convo };
-
-//       convoCopy.messages.forEach((message) => {
-//         if (message.senderId !== convoCopy.otherUser.id) {
-//           message.read = true;
-//         }
-//       });
-//       return convoCopy;
-//     } else {
-//       return convo;
-//     }
-//   });
-// };
-
-//Decided to create a function that will update conversation when we make a change
-
-export const updateConversationInStore = (state, updatedConvo) => {
-  return state.map((convo) => {
-    if (convo.id === updatedConvo.id) {
-      return updatedConvo;
+export const addReadStatusToStore = (state, payload) => {
+  const { conversationId } = payload;
+  const newState = [...state];
+  return newState.map((convo) => {
+    if (convo.id === conversationId) {
+      const convoCopy = { ...convo };
+      convoCopy.messages.forEach((message) => {
+        if (message.senderId !== convoCopy.otherUser.id) {
+          message.read = true;
+        }
+      });
+      return convoCopy;
     } else {
       return convo;
     }
+  });
+};
+
+export const addUnreadToStore = (state, payload) => {
+  const { conversationId } = payload;
+  const newState = [...state];
+  return newState.map((convo) => {
+    if (convo.id === conversationId) {
+      const convoCopy = { ...convo };
+      convoCopy.unreadMessages = 0;
+      return convoCopy;
+    }
+    return convo;
   });
 };

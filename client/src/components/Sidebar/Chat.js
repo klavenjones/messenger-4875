@@ -1,33 +1,19 @@
 import React from "react";
-import { Box } from "@material-ui/core";
+import { Box, Badge } from "@material-ui/core";
 import { BadgeAvatar, ChatContent } from "../Sidebar";
-import { makeStyles } from "@material-ui/core/styles";
 import { setActiveChat } from "../../store/activeConversation";
 import { markAsRead } from "../../store/utils/thunkCreators";
+import { useChatStyles } from "../../styles";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    borderRadius: 8,
-    height: 80,
-    boxShadow: "0 2px 10px 0 rgba(88,133,196,0.05)",
-    marginBottom: 10,
-    display: "flex",
-    alignItems: "center",
-    "&:hover": {
-      cursor: "grab"
-    }
-  }
-}));
-
 const Chat = (props) => {
-  const classes = useStyles();
+  const classes = useChatStyles();
   const { conversation, setActiveChat, markAsRead } = props;
   const { otherUser } = conversation;
-  console.log(conversation);
+
   const handleClick = async (conversation) => {
     try {
-      Promise.all([
+      await Promise.all([
         setActiveChat(conversation.otherUser.username),
         markAsRead(conversation.id, otherUser.id)
       ]);
@@ -45,6 +31,9 @@ const Chat = (props) => {
         sidebar={true}
       />
       <ChatContent conversation={conversation} />
+      {conversation.unreadMessages > 0 && (
+        <Badge className={classes.badge}>{conversation.unreadMessages}</Badge>
+      )}
     </Box>
   );
 };

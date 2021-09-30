@@ -74,9 +74,7 @@ router.get("/", async (req, res, next) => {
       let unreadMessages = 0;
       unreadMessages = await Message.count({
         where: {
-          [Op.not]: {
-            senderId: convoJSON.otherUser.id
-          },
+          senderId: convoJSON.otherUser.id,
           conversationId: convoJSON.id,
           read: false
         }

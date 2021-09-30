@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const { Conversation, Message, User } = require("../../db/models");
-const { Op } = require("sequelize");
+const { Conversation, Message } = require("../../db/models");
 const onlineUsers = require("../../onlineUsers");
 
 // expects {recipientId, text, conversationId } in body (conversationId will be null if no conversation exists yet)
@@ -58,62 +57,19 @@ router.put("/read", async (req, res, next) => {
       return res.sendStatus(401);
     }
     const { senderId, conversationId } = req.body;
-    console.log(req.body);
 
     if (!conversationId || !senderId) {
+      console.log(conversationId, senderId);
       return res.sendStatus(400);
     }
     const { user1Id, user2Id } = await Conversation.findByPk(conversationId);
-    console.log(user1Id);
+
     if (user1Id !== req.user.id && user2Id !== req.user.id) {
       return res.sendStatus(403);
     }
     await Message.markAsRead(req.user.id, conversationId);
 
-    let updatedConvo = await Conversation.findOne({
-      where: {
-        id: conversationId
-      },
-      attributes: ["id"],
-      order: [[Message, "createdAt", "ASC"]],
-      include: [
-        { model: Message },
-        {
-          model: User,
-          as: "user1",
-          where: {
-            id: {
-              [Op.not]: req.user.id
-            }
-          },
-          attributes: ["id", "username", "photoUrl"],
-          required: false
-        },
-        {
-          model: User,
-          as: "user2",
-          where: {
-            id: {
-              [Op.not]: req.user.id
-            }
-          },
-          attributes: ["id", "username", "photoUrl"],
-          required: false
-        }
-      ]
-    });
-    const convoJSON = updatedConvo.toJSON();
-
-    if (convoJSON.user1) {
-      convoJSON.otherUser = convoJSON.user1;
-      delete convoJSON.user1;
-    } else if (convoJSON.user2) {
-      convoJSON.otherUser = convoJSON.user2;
-      delete convoJSON.user2;
-    }
-    const endOfConvoListIndex = convoJSON.messages.length - 1;
-    convoJSON.latestMessageText = convoJSON.messages[endOfConvoListIndex].text;
-    return res.status(200).json({ conversation: convoJSON });
+    return res.sendStatus(204);
   } catch (error) {
     next(error);
   }

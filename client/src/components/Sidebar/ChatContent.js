@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   unreadText: {
     fontSize: 14,
     fontWeight: 900,
-    color: "#888888"
+    color: "#555555"
   }
 }));
 
@@ -31,7 +31,6 @@ const ChatContent = (props) => {
   const { conversation } = props;
   const { latestMessageText, otherUser, unreadMessages } = conversation;
 
-  console.log(conversation);
   return (
     <Box className={classes.root}>
       <Box>
