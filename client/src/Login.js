@@ -7,7 +7,7 @@ import {
   Typography,
   Button,
   FormControl,
-  TextField,
+  TextField
 } from "@material-ui/core";
 import { login } from "./store/utils/thunkCreators";
 
@@ -28,7 +28,7 @@ const Login = (props) => {
   }
 
   return (
-    <Grid container justify="center">
+    <Grid container justifyContent="center">
       <Box>
         <Grid container item>
           <Typography>Need to register?</Typography>
@@ -68,7 +68,7 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    user: state.user
   };
 };
 
@@ -76,7 +76,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     login: (credentials) => {
       dispatch(login(credentials));
-    },
+    }
   };
 };
 
