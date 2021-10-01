@@ -4,18 +4,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import { Search, Chat, CurrentUser } from "./index.js";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    paddingLeft: 21,
-    paddingRight: 21,
+    paddingLeft: theme.spacing(1.3125),
+    paddingRight: theme.spacing(1.3125),
     flexGrow: 1
   },
   title: {
     fontSize: 20,
     letterSpacing: -0.29,
     fontWeight: "bold",
-    marginTop: 32,
-    marginBottom: 15
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(0.9375)
   }
 }));
 

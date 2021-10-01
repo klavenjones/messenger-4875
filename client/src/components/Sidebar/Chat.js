@@ -18,7 +18,7 @@ const Chat = (props) => {
         markAsRead(conversation.id, otherUser.id)
       ]);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

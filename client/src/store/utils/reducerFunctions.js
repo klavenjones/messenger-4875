@@ -94,8 +94,7 @@ export const addNewConvoToStore = (state, recipientId, message) => {
 
 export const addReadStatusToStore = (state, payload) => {
   const { conversationId } = payload;
-  const newState = [...state];
-  return newState.map((convo) => {
+  return state.map((convo) => {
     if (convo.id === conversationId) {
       const convoCopy = { ...convo };
       convoCopy.messages.forEach((message) => {
@@ -112,8 +111,7 @@ export const addReadStatusToStore = (state, payload) => {
 
 export const addUnreadToStore = (state, payload) => {
   const { conversationId } = payload;
-  const newState = [...state];
-  return newState.map((convo) => {
+  return state.map((convo) => {
     if (convo.id === conversationId) {
       const convoCopy = { ...convo };
       convoCopy.unreadMessages = 0;

@@ -80,7 +80,7 @@ router.get("/", async (req, res, next) => {
         }
       });
       convoJSON.unreadMessages = unreadMessages;
-
+     
       const endOfConvoListIndex = convoJSON.messages.length - 1;
       convoJSON.latestMessageText =
         convoJSON.messages[endOfConvoListIndex].text;

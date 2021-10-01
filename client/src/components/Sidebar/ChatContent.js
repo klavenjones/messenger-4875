@@ -6,12 +6,12 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "space-between",
-    marginLeft: 20,
+    marginLeft: theme.spacing(1.25),
     flexGrow: 1
   },
   username: {
     fontWeight: "bold",
-    letterSpacing: -0.2
+    letterSpacing: theme.spacing(-0.0125)
   },
   previewText: {
     fontSize: 12,
