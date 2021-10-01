@@ -13,6 +13,13 @@ router.post("/", async (req, res, next) => {
 
     // if we already know conversation id, we can save time and just add it to message and return
     if (conversationId) {
+      const { user1Id, user2Id } = await Conversation.findByPk(conversationId);
+      if (
+        (user1Id !== senderId && user2Id !== senderId) ||
+        (user1Id !== recipientId && user2Id !== recipientId)
+      ) {
+        return res.sendStatus(403);
+      }
       const message = await Message.create({ senderId, text, conversationId });
       return res.json({ message, sender });
     }
@@ -44,17 +51,25 @@ router.post("/", async (req, res, next) => {
 });
 
 //Apply read message
-router.put("/", async (req, res, next) => {
+router.put("/read", async (req, res, next) => {
   try {
     if (!req.user) {
       return res.sendStatus(401);
     }
     const { senderId, conversationId } = req.body;
-    if (conversationId) {
-      await Message.markAsRead(senderId, conversationId);
-      return res.sendStatus(204);
+
+    if (!conversationId || !senderId) {
+      console.log(conversationId, senderId);
+      return res.sendStatus(400);
     }
-    return res.sendStatus(400);
+    const { user1Id, user2Id } = await Conversation.findByPk(conversationId);
+
+    if (user1Id !== req.user.id && user2Id !== req.user.id) {
+      return res.sendStatus(403);
+    }
+    await Message.markAsRead(req.user.id, conversationId);
+
+    return res.sendStatus(204);
   } catch (error) {
     next(error);
   }

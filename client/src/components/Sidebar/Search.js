@@ -3,7 +3,7 @@ import { FormControl, FilledInput, InputAdornment } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   filledInput: {
     height: 50,
     background: "#E9EEF9",
@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
     letterSpacing: 0,
     display: "flex",
     justifyContent: "center",
-    marginBottom: 20
+    marginBottom: theme.spacing(1.25)
   },
   input: {
     "&::placeholder": {
