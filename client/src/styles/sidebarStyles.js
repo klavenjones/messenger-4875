@@ -22,8 +22,8 @@ export const useAvatarStyles = makeStyles((theme) => ({
 
 export const useChatStyles = makeStyles((theme) => ({
   root: {
-    borderRadius: theme.spacing(0.5),
-    height: theme.spacing(5),
+    borderRadius: 8,
+    height: 8,
     boxShadow: "0 2px 10px 0 rgba(88,133,196,0.05)",
     marginBottom: theme.spacing(0.625),
     display: "flex",
@@ -33,7 +33,7 @@ export const useChatStyles = makeStyles((theme) => ({
     }
   },
   badge: {
-    width: theme.spacing(2.1875),
+    width: 35,
     borderRadius: "100%",
     padding: "10px 15px",
     background: "#3F92FF",

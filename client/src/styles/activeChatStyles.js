@@ -24,7 +24,7 @@ export const useInputStyles = makeStyles((theme) => ({
   input: {
     height: theme.spacing(4.375),
     backgroundColor: "#F4F6FA",
-    borderRadius: theme.spacing(0.5),
+    borderRadius: 8,
     marginBottom: theme.spacing(1.25)
   }
 }));
@@ -34,8 +34,8 @@ export const useOtherBubbleStyles = makeStyles((theme) => ({
     display: "flex"
   },
   avatar: {
-    height: theme.spacing(1.875),
-    width: theme.spacing(1.875),
+    height: 30,
+    width: 30,
     marginRight: theme.spacing(0.6875),
     marginTop: theme.spacing(0.375)
   },
@@ -53,7 +53,7 @@ export const useOtherBubbleStyles = makeStyles((theme) => ({
     fontSize: 14,
     fontWeight: "bold",
     color: "#FFFFFF",
-    letterSpacing: theme.spacing(-0.0125),
+    letterSpacing: -0.2,
     padding: theme.spacing(0.5)
   }
 }));
@@ -76,12 +76,12 @@ export const useSenderBubbleStyles = makeStyles((theme) => ({
     fontSize: 11,
     color: "#BECCE2",
     fontWeight: "bold",
-    marginBottom: 5
+    marginBottom: theme.spacing(0.3125)
   },
   text: {
     fontSize: 14,
     color: "#91A3C0",
-    letterSpacing: theme.spacing(-0.0125),
+    letterSpacing: -0.2,
     padding: theme.spacing(0.5),
     fontWeight: "bold"
   },
@@ -90,8 +90,8 @@ export const useSenderBubbleStyles = makeStyles((theme) => ({
     borderRadius: "10px 10px 0 10px"
   },
   avatar: {
-    height: theme.spacing(1.875),
-    width: theme.spacing(1.875),
+    height: 30,
+    width: 30,
     marginRight: theme.spacing(0.0625),
     marginTop: theme.spacing(0.0625),
     marginBottom: theme.spacing(0.375)
@@ -103,7 +103,7 @@ export const useHeaderStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    height: theme.spacing(5.5625),
+    height: 89,
     marginBottom: theme.spacing(2.125),
     boxShadow: "0 2px 20px 0 rgba(88,133,196,0.10)"
   },
@@ -114,7 +114,7 @@ export const useHeaderStyles = makeStyles((theme) => ({
   },
   username: {
     fontSize: 20,
-    letterSpacing: theme.spacing(-0.018125),
+    letterSpacing: -29,
     fontWeight: "bold",
     marginRight: theme.spacing(0.875)
   },
@@ -124,8 +124,8 @@ export const useHeaderStyles = makeStyles((theme) => ({
     letterSpacing: theme.spacing(0.010625)
   },
   statusDot: {
-    height: theme.spacing(0.5),
-    width: theme.spacing(0.5),
+    height: 8,
+    width: 8,
     borderRadius: "50%",
     marginRight: theme.spacing(0.3125),
     backgroundColor: "#D0DAE9"
